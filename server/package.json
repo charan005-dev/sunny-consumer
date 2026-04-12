@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "build": "echo 'Using tsx runtime - no build needed'",
+    "start": "tsx src/index.ts",
     "migrate": "prisma migrate dev",
     "seed": "tsx prisma/seed.ts",
     "db:reset": "prisma migrate reset --force"
@@ -18,6 +18,7 @@
     "express-oauth2-jwt-bearer": "^1.6.0",
     "helmet": "^8.0.0",
     "dotenv": "^16.4.0",
+    "tsx": "^4.19.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {
@@ -25,7 +26,6 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.0",
     "prisma": "^6.3.0",
-    "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }
 }

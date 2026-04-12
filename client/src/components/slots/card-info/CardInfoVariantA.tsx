@@ -1,4 +1,3 @@
-import { CreditCard } from "lucide-react";
 import { useTheme } from "../../../contexts/ThemeContext";
 
 interface Props {

@@ -54,7 +54,7 @@ export default function SidebarVariantB({ props }: Props) {
                 style={isActive ? { backgroundColor: theme.activeBg } : {}}
                 title={item}
               >
-                <Icon className="w-5 h-5" style={isActive ? { color: theme.activeText } : { color: "#6b7280" }} />
+                <span style={isActive ? { color: theme.activeText } : { color: "#6b7280" }}><Icon className="w-5 h-5" /></span>
               </button>
             </li>
           );

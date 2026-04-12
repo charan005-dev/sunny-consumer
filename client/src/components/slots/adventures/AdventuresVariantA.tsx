@@ -14,9 +14,8 @@ const ADVENTURES = [
   { name: "Mindfulness journey", color: "#be185d" },
 ];
 
-export default function AdventuresVariantA({ props }: Props) {
+export default function AdventuresVariantA({ props: _props }: Props) {
   const theme = useTheme();
-  const _cardWidth = (props.cardWidth as number) ?? 220;
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100">

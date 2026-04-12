@@ -14,7 +14,7 @@ const ADVENTURES = [
   { name: "Mindfulness journey", desc: "Guided meditation series", color: "#be185d" },
 ];
 
-export default function AdventuresVariantB({ props }: Props) {
+export default function AdventuresVariantB({ props: _props }: Props) {
   const theme = useTheme();
 
   return (

@@ -17,9 +17,8 @@ const SAMPLE_ACTIONS = [
   { name: "Eat well to fuel your body", reward: 10, desc: "Complete a nutrition course", hasEntries: true },
 ];
 
-export default function ActionsListVariantA({ props }: Props) {
+export default function ActionsListVariantA({ props: _props }: Props) {
   const theme = useTheme();
-  const _showCategories = (props.showCategories as boolean) ?? true;
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">

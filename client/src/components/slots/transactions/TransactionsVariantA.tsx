@@ -1,4 +1,4 @@
-import { ChevronRight, ShieldCheck, AlertCircle } from "lucide-react";
+import { ShieldCheck, AlertCircle } from "lucide-react";
 import { useTheme } from "../../../contexts/ThemeContext";
 
 interface Props {

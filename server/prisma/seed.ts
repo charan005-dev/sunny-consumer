@@ -25,11 +25,6 @@ async function main() {
     create: { code: "default", name: "Default", tenantId: kaiser.id },
   });
   await prisma.cohort.upsert({
-    where: { tenantId_code: { tenantId: kaiser.id, code: "premium" } },
-    update: {},
-    create: { code: "premium", name: "Premium", tenantId: kaiser.id },
-  });
-  await prisma.cohort.upsert({
     where: { tenantId_code: { tenantId: kaiser.id, code: "genz" } },
     update: {},
     create: { code: "genz", name: "Gen Z", tenantId: kaiser.id },
@@ -43,11 +38,6 @@ async function main() {
     where: { tenantId_code: { tenantId: sunny.id, code: "default" } },
     update: {},
     create: { code: "default", name: "Default", tenantId: sunny.id },
-  });
-  await prisma.cohort.upsert({
-    where: { tenantId_code: { tenantId: sunny.id, code: "premium" } },
-    update: {},
-    create: { code: "premium", name: "Premium", tenantId: sunny.id },
   });
   await prisma.cohort.upsert({
     where: { tenantId_code: { tenantId: sunny.id, code: "genz" } },

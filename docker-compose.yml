@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: layout-builder-db
+    environment:
+      POSTGRES_USER: layout_builder
+      POSTGRES_PASSWORD: layout_builder_pass
+      POSTGRES_DB: layout_builder
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

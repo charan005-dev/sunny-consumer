@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cohorts     Cohort[]
+  pageLayouts PageLayout[]
+
+  @@map("tenants")
+}
+
+model Cohort {
+  id          String   @id @default(uuid())
+  code        String
+  name        String
+  description String?
+  tenantId    String   @map("tenant_id")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tenant      Tenant       @relation(fields: [tenantId], references: [id])
+  pageLayouts PageLayout[]
+
+  @@unique([tenantId, code])
+  @@map("cohorts")
+}
+
+model Route {
+  id          String   @id @default(uuid())
+  path        String   @unique
+  name        String
+  description String?
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  slotDefinitions SlotDefinition[]
+  pageLayouts     PageLayout[]
+
+  @@map("routes")
+}
+
+model ComponentRegistryEntry {
+  id           String   @id @default(uuid())
+  code         String   @unique
+  name         String
+  description  String?
+  slotType     String   @map("slot_type")
+  thumbnailUrl String?  @map("thumbnail_url")
+  defaultProps String?  @map("default_props")
+  propsSchema  String?  @map("props_schema")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("component_registry")
+}
+
+model SlotDefinition {
+  id               String   @id @default(uuid())
+  routeId          String   @map("route_id")
+  slotKey          String   @map("slot_key")
+  name             String
+  allowedSlotTypes String   @map("allowed_slot_types")
+  required         Boolean  @default(false)
+  sortOrder        Int      @default(0) @map("sort_order")
+  viewports        String   @default("[\"desktop\",\"mobile\"]")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  route Route @relation(fields: [routeId], references: [id])
+
+  @@unique([routeId, slotKey])
+  @@map("slot_definitions")
+}
+
+model PageLayout {
+  id          String    @id @default(uuid())
+  routeId     String    @map("route_id")
+  tenantId    String    @map("tenant_id")
+  cohortId    String    @map("cohort_id")
+  viewport    String
+  layoutJson  String    @map("layout_json")
+  version     Int       @default(1)
+  status      String    @default("draft")
+  publishedAt DateTime? @map("published_at")
+  publishedBy String?   @map("published_by")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  route  Route  @relation(fields: [routeId], references: [id])
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  cohort Cohort @relation(fields: [cohortId], references: [id])
+
+  @@unique([routeId, tenantId, cohortId, viewport, status])
+  @@map("page_layouts")
+}

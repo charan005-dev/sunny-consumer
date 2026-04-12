@@ -1,0 +1,42 @@
+[
+  {
+    "email": "kp_genz@yopmail.com",
+    "email_verified": true,
+    "password": "Test1234!",
+    "connection": "Username-Password-Authentication",
+    "user_metadata": {
+      "tenant_code": "kaiser",
+      "cohort_code": "genz"
+    }
+  },
+  {
+    "email": "kp_millennial@yopmail.com",
+    "email_verified": true,
+    "password": "Test1234!",
+    "connection": "Username-Password-Authentication",
+    "user_metadata": {
+      "tenant_code": "kaiser",
+      "cohort_code": "millennial"
+    }
+  },
+  {
+    "email": "sunny_genz@yopmail.com",
+    "email_verified": true,
+    "password": "Test1234!",
+    "connection": "Username-Password-Authentication",
+    "user_metadata": {
+      "tenant_code": "sunny",
+      "cohort_code": "genz"
+    }
+  },
+  {
+    "email": "sunny_millennial@yopmail.com",
+    "email_verified": true,
+    "password": "Test1234!",
+    "connection": "Username-Password-Authentication",
+    "user_metadata": {
+      "tenant_code": "sunny",
+      "cohort_code": "millennial"
+    }
+  }
+]

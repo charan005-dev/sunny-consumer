@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: sunny-flex-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: AUTH0_ISSUER_BASE_URL
+        value: https://sunny-app-builder-dev.us.auth0.com
+      - key: AUTH0_AUDIENCE
+        value: https://api.layout-builder.local
+      - key: PORT
+        value: 3001
+      - key: DEV_BYPASS_AUTH
+        value: "false"
+      - key: CONSOLE_URL
+        value: https://sunny-flex.vercel.app
+      - key: CONSUMER_URL
+        value: https://sunny-consumer.vercel.app

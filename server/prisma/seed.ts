@@ -62,7 +62,12 @@ async function main() {
     update: {},
     create: { path: "/my-card", name: "My Card", description: "Card balance and transactions page" },
   });
-  console.log("  Routes:", rewardsRoute.path, myCardRoute.path);
+  const dashboardRoute = await prisma.route.upsert({
+    where: { path: "/dashboard" },
+    update: {},
+    create: { path: "/dashboard", name: "Dashboard", description: "Main dashboard page" },
+  });
+  console.log("  Routes:", rewardsRoute.path, myCardRoute.path, dashboardRoute.path);
 
   // --- Slot Definitions (arrays stored as JSON strings in SQLite) ---
   const slotDefs = [

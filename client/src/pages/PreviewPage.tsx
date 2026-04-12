@@ -35,7 +35,7 @@ export default function PreviewPage() {
     },
     enabled: !!tenantCode,
     staleTime: 0,
-    placeholderData: (prev: unknown) => prev, // keep showing old data while refetching
+    placeholderData: (prev: PageLayoutConfig | undefined) => prev,
   });
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export default function PreviewPage() {
         {/* Layout grid — fills remaining height */}
         <div className="flex-1 min-h-0 overflow-auto">
           <LayoutRenderer
-            config={layoutConfig}
+            config={layoutConfig!}
             editMode
             selectedSlot={selectedSlot}
             dragHoverSlot={dragHoverSlot}

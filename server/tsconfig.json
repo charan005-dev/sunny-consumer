@@ -11,10 +11,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "declaration": true,
-    "sourceMap": true,
-    "paths": {
-      "@shared/*": ["../shared/*"]
-    }
+    "sourceMap": true
   },
-  "include": ["src", "../shared"]
+  "include": ["src"]
 }

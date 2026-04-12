@@ -35,6 +35,7 @@ export default function PreviewPage() {
     },
     enabled: !!tenantCode,
     staleTime: 0,
+    placeholderData: (prev: unknown) => prev, // keep showing old data while refetching
   });
 
   useEffect(() => {

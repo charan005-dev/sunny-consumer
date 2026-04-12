@@ -60,6 +60,33 @@ router.get("/layout", async (req: Request, res: Response) => {
     }
   }
 
+  // Fallback: use /my-card route's layout as template
+  const templateRoute = await prisma.route.findUnique({ where: { path: "/my-card" } });
+  if (templateRoute) {
+    const defaultCohort = await prisma.cohort.findFirst({
+      where: { tenantId: tenant.id, code: "default" },
+    });
+    if (defaultCohort) {
+      for (const s of statusToTry) {
+        const templateLayout = await prisma.pageLayout.findUnique({
+          where: {
+            routeId_tenantId_cohortId_viewport_status: {
+              routeId: templateRoute.id,
+              tenantId: tenant.id,
+              cohortId: defaultCohort.id,
+              viewport: viewport as string,
+              status: s,
+            },
+          },
+        });
+        if (templateLayout) {
+          res.json({ data: JSON.parse(templateLayout.layoutJson), status: s, template: true });
+          return;
+        }
+      }
+    }
+  }
+
   res.status(404).json({ error: "No layout found" });
 });
 

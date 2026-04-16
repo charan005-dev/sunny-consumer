@@ -9,3 +9,31 @@ body {
 #root {
   min-height: 100vh;
 }
+
+/* Sub-component highlight — follows element's natural border-radius */
+[data-sub-key].sub-highlight {
+  position: relative;
+  z-index: 5;
+  outline: 2px solid white;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px black, 0 0 0 4px white;
+}
+/* Label at bottom-right to avoid being clipped by upper elements */
+[data-sub-key].sub-highlight::after {
+  content: attr(data-sub-label);
+  position: absolute;
+  bottom: -2px;
+  right: 8px;
+  transform: translateY(100%);
+  background: black;
+  color: white;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 0 0 6px 6px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+}

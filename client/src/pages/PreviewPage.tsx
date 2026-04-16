@@ -20,6 +20,7 @@ export default function PreviewPage() {
   const cohortCode = searchParams.get("cohortCode") ?? "default";
   const status = searchParams.get("status") ?? "draft";
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+  const [selectedSubKey, setSelectedSubKey] = useState<string | null>(null);
   const [dragHoverSlot, setDragHoverSlot] = useState<string | null>(null);
 
   const { data: layoutConfig, isLoading, error } = useQuery<PageLayoutConfig>({
@@ -42,7 +43,8 @@ export default function PreviewPage() {
     function handleMessage(event: MessageEvent) {
       const msg = event.data;
       if (!msg?.type) return;
-      if (msg.type === "select-slot") setSelectedSlot(msg.slotKey);
+      if (msg.type === "select-slot") { setSelectedSlot(msg.slotKey); setSelectedSubKey(null); }
+      if (msg.type === "select-sub") { setSelectedSlot(msg.slotKey); setSelectedSubKey(msg.subKey); }
       if (msg.type === "refresh") queryClient.invalidateQueries({ queryKey: ["preview-layout"] });
       if (msg.type === "drag-hover") setDragHoverSlot(msg.slotKey);
       if (msg.type === "drag-end") setDragHoverSlot(null);
@@ -118,6 +120,7 @@ export default function PreviewPage() {
             config={layoutConfig!}
             editMode
             selectedSlot={selectedSlot}
+            selectedSubKey={selectedSubKey}
             dragHoverSlot={dragHoverSlot}
             onSlotClick={handleSlotClick}
           />

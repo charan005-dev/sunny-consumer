@@ -5,6 +5,7 @@ interface LayoutRendererProps {
   config: PageLayoutConfig;
   editMode?: boolean;
   selectedSlot?: string | null;
+  selectedSubKey?: string | null;
   dragHoverSlot?: string | null;
   onSlotClick?: (slotKey: string) => void;
 }
@@ -19,7 +20,7 @@ function responsiveColumns(columns: string): string {
   });
 }
 
-export default function LayoutRenderer({ config, editMode, selectedSlot, dragHoverSlot, onSlotClick }: LayoutRendererProps) {
+export default function LayoutRenderer({ config, editMode, selectedSlot, selectedSubKey, dragHoverSlot, onSlotClick }: LayoutRendererProps) {
   const isMobile = config.gridTemplate.columns === "1fr";
 
   const gridStyle: React.CSSProperties = {
@@ -44,6 +45,7 @@ export default function LayoutRenderer({ config, editMode, selectedSlot, dragHov
           props={slotConfig.props}
           editMode={editMode}
           isSelected={selectedSlot === slotKey}
+          selectedSubKey={selectedSlot === slotKey ? selectedSubKey : null}
           isDragHover={dragHoverSlot === slotKey}
           onClick={editMode ? () => onSlotClick?.(slotKey) : undefined}
         />
